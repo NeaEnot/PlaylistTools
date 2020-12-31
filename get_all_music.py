@@ -1,5 +1,4 @@
 import os
-import random
 import time
 
 dir_from = 'Все песни'
