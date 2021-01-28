@@ -20,27 +20,32 @@ def search(files):
             
     return search
 
-try:
-    files = os.listdir(dir_from)
-    #files = search(files)    
-    playlist = []
-    
-    for i in range(100):
-        file = files[random.randint(0, len(files) - 1)]
-        files.remove(file)
-        playlist.append(file)
+def form_playlist(count_files = 100, show_log = False):
+    try:
+        files = os.listdir(dir_from)
+        #files = search(files)    
+        playlist = []
         
-        print(file)
-        
-        if len(files) == 0:
-            break
-
-    playlist.sort()
-
-    with open('playlist.txt', 'w') as file:
-        for track in playlist:
-            file.write(track + '\n')
+        for i in range(count_files):
+            file = files[random.randint(0, len(files) - 1)]
+            files.remove(file)
+            playlist.append(file)
             
-except Exception as e:
-    print(e)
-    time.sleep(10)
+            if show_log:
+                print(file)
+            
+            if len(files) == 0:
+                break
+
+        playlist.sort()
+
+        with open('playlist.txt', 'w', encoding='utf-8') as file:
+            for track in playlist:
+                file.write(track + '\n')
+                
+    except Exception as e:
+        print(e)
+        time.sleep(10)
+
+if __name__ == '__main__':    
+    form_playlist(True)
